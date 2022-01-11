@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\Modrinth.ico</ApplicationIcon>
+    <UseWindowsForms>True</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Pages\download2.png" />
+    <None Remove="Pages\download256x256.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Modrinth.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Pages\download2.png" />
+  </ItemGroup>
+
+</Project>
