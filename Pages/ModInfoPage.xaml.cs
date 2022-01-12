@@ -31,17 +31,17 @@ namespace webScrapWPF.Pages
             actualMod = new ModInfo();
             downloadImage = new BitmapImage();
             downloadImage.BeginInit();
-            downloadImage.UriSource = new Uri(@"U:\Programacion\C#\webScrapWPF\Resources\download.png");
+            downloadImage.UriSource = new Uri(@"X:\GitHub\MinecraftModDownloader\Resources\download.png");
             downloadImage.EndInit();
 
             forgeImage = new BitmapImage();
             forgeImage.BeginInit();
-            forgeImage.UriSource = new Uri(@"U:\Programacion\C#\webScrapWPF\Resources\forge.png");
+            forgeImage.UriSource = new Uri(@"X:\GitHub\MinecraftModDownloader\Resources\forge.png");
             forgeImage.EndInit();
 
             fabricImage = new BitmapImage();
             fabricImage.BeginInit();
-            fabricImage.UriSource = new Uri(@"U:\Programacion\C#\webScrapWPF\Resources\fabric.png");
+            fabricImage.UriSource = new Uri(@"X:\GitHub\MinecraftModDownloader\Resources\fabric.png");
             fabricImage.EndInit();
             
         }
@@ -140,8 +140,8 @@ namespace webScrapWPF.Pages
 
                 Image categoryImage = new();
                 if (icons.Contains(category))
-                    categoryImage.Source = new BitmapImage(new Uri(@"U:\Programacion\C#\webScrapWPF\Resources\" + category + ".png"));
-                else categoryImage.Source = new BitmapImage(new Uri(@"U:\Programacion\C#\webScrapWPF\Resources\imageNotFound.png"));
+                    categoryImage.Source = new BitmapImage(new Uri(@"X:\GitHub\MinecraftModDownloader\Resources\" + category + ".png"));
+                else categoryImage.Source = new BitmapImage(new Uri(@"X:\GitHub\MinecraftModDownloader\Resources\imageNotFound.png"));
                 categoryImage.VerticalAlignment = VerticalAlignment.Top;
                 categoryImage.Stretch = Stretch.Uniform;
                 categoryImage.Height = 25;
@@ -215,19 +215,26 @@ namespace webScrapWPF.Pages
                 i++;
             }
         }
+ 
         public async void downloadClicked(object sender, MouseButtonEventArgs e)
         {
+            Progress<int> progress = new();
+            progress.ProgressChanged += changedProgress;
+
             downloadProgress.Value = 0;
             downloadProgress.Visibility = Visibility.Visible;
             Image send = (Image)sender;
             int pos = int.Parse(send.Name.Replace("icon", ""))-1;
 
             string url = actualMod.versionsDetailled[pos].files[0].url;
-            downloadProgress.Value = 10;
-            downloadProgress.Tag = "10%";
-            await Scraper.download(url, actualMod.versionsDetailled[pos].files[0].filename);
+            await Scraper.download(url, actualMod.versionsDetailled[pos].files[0].filename, progress);
             downloadProgress.Value = 100;
             downloadProgress.Tag = "Done!";
+        }
+        private void changedProgress(object? sender, int newProgress)
+        {
+            downloadProgress.Value = newProgress;
+            downloadProgress.Tag = (newProgress != 100) ? newProgress.ToString() + "%" : "Done!";
         }
     }
 }

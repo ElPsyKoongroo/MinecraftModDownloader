@@ -36,34 +36,48 @@ public class Scraper
         return String.Empty;
     }
 
-    public static async Task<bool> download(String url, string fileName){
+    public static async Task download(String url, string fileName, IProgress<int> progress){
 
-        HttpResponseMessage response = await client.GetAsync(url);
+        HttpResponseMessage chunkResponse;
+        byte[] chunkContent;
 
-        
+        long chunk = 102400L;
 
-        //client.
+        byte[] chunks = { };
 
-        string path = $"{MainWindow.downloadPath}/{fileName}";
+        long totalSize = await GetSize(url);
 
-        
+        long totalChunks = (totalSize / chunk); // 100/100 
 
-        if (response.IsSuccessStatusCode)
+        long remanent = (totalSize % chunk);
+
+        if (remanent != 0) totalChunks++;
+
+        for (int i = 0; i < totalChunks; i++)
         {
-            File.WriteAllBytes(path, await response.Content.ReadAsByteArrayAsync());
-            return true;
+            HttpRequestMessage msg = new();
+            msg.RequestUri = new Uri(url);
+            long actualChunk = (i == totalChunks - 1) ? remanent : chunk;
+            msg.Headers.Range = new System.Net.Http.Headers.RangeHeaderValue(i * chunk, i * chunk + actualChunk - 1);
+            chunkResponse = await client.SendAsync(msg);
+            chunkContent = await chunkResponse.Content.ReadAsByteArrayAsync();
+            chunks = chunks.Concat(chunkContent).ToArray();
+            progress.Report((int)((chunk*(i)+actualChunk)*100 / totalSize)); 
         }
-        return false;
+        await File.WriteAllBytesAsync($"{MainWindow.downloadPath}/{fileName}", chunks);
     }
-    public static long Size(string url)
-    {
-        System.Net.WebRequest req = System.Net.HttpWebRequest.Create(url);
-        req.Method = "HEAD";
-        System.Net.WebResponse resp = req.GetResponse();
-        long size = resp.ContentLength;
-        resp.Close();
-        return size;
 
+    public static async Task<long> GetSize(string url)
+    {
+        long size;
+        HttpRequestMessage msg = new();
+        msg.RequestUri = new Uri(url);
+        msg.Headers.Range = new System.Net.Http.Headers.RangeHeaderValue(0, 0);
+        var response = await client.SendAsync(msg);
+        string contentRange = response.Content.Headers.GetValues(@"Content-Range").Single();
+        string lengthString = System.Text.RegularExpressions.Regex.Match(contentRange, @"(?<=^bytes\s[0-9]+\-[0-9]+/)[0-9]+$").Value;
+        size = long.Parse(lengthString);
+        return size;
     }
 }
 
