@@ -30,8 +30,8 @@
 
             <StackPanel x:Name="stackLeft" Grid.Row="0" Orientation="Vertical">
                 <StackPanel Orientation="Horizontal">
-                    <TextBox Foreground="#b6b7ba" Width="150" x:Name="txtInputPages"/>
-                    <Button x:Name="btnSearch" Width="100" Content="Click para buscar" Click="btnSearch_Click"/>
+                    <TextBox Foreground="#b6b7ba" Width="150" x:Name="txtInputPages" KeyDown="btnSearchOnKeyDown"/>
+                    <Button x:Name="btnSearch" Width="100" Content="Click para buscar" Click="btnSearch_Click" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Foreground="#b6b7ba" Width="150" x:Name="txtAux" TextAlignment="Left" HorizontalAlignment="Left"/>
@@ -43,6 +43,7 @@
                     <TextBox x:Name="txtInputFolder" MinWidth="200" IsEnabled="False" HorizontalAlignment="Left"/>
                     <Button x:Name="btnFolder" Width="90" Content="Select Folder" Click="btnFolder_Click" HorizontalAlignment="Left"/>
             </StackPanel>
+            <TextBlock x:Name="txtSize" Foreground="White" FontSize="15" HorizontalAlignment="Center" Grid.Row="1"/>
             <TextBlock x:Name="version" Text="v1.0" Foreground="White" FontSize="15" VerticalAlignment="Bottom" Grid.Row="1"/>
         </Grid>
         <Frame x:Name="frame" Grid.Row="1" Grid.Column="2" NavigationUIVisibility="Hidden"/>

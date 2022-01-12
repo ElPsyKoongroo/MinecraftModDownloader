@@ -47,9 +47,10 @@ public partial class MainWindow : Window
         modNames    = new();
         stackPanels = new();
         images      = new();
-        modList = new();
+        modList     = new();
         modInfoPage = new();
 
+        version.Text = "v1.1.0";
         //modList.pagesGrid.ShowGridLines = true;
 
         frame.Content = modList;
@@ -140,6 +141,21 @@ public partial class MainWindow : Window
         txtAux.Text = "Terminado";
     }
 
+    private async void btnSearchOnKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter)
+        {
+            if (!int.TryParse(txtInputPages.Text, out int page)) return;
+
+            actualPage = page;
+
+            txtAux.Text = "Cargando";
+
+            await LoadPage(actualPage);
+            txtAux.Text = "Terminado";
+        }
+    }
+
     private async Task LoadPage(int page)
     {
         if(!pages.ContainsKey(page))
@@ -153,9 +169,9 @@ public partial class MainWindow : Window
         {
             modNames[i].Text = pages[actualPage].mods[i].title;
 
+            if (pages[actualPage].mods[i].icon_url == "")
+                pages[actualPage].mods[i].icon_url = @"U:\Programacion\C#\webScrapWPF\Resources\imageNotFound.png";
             images[i].Source = new BitmapImage(new Uri(pages[actualPage].mods[i].icon_url));
-
-
         }
 
     }

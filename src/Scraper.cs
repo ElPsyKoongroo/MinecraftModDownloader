@@ -39,6 +39,10 @@ public class Scraper
 
         HttpResponseMessage response = await client.GetAsync(url);
 
+        
+
+        //client.
+
         string path = $"{MainWindow.downloadPath}/{fileName}";
 
         if (response.IsSuccessStatusCode)
@@ -47,6 +51,16 @@ public class Scraper
             return true;
         }
         return false;
+    }
+    public static long Size(string url)
+    {
+        System.Net.WebRequest req = System.Net.HttpWebRequest.Create(url);
+        req.Method = "HEAD";
+        System.Net.WebResponse resp = req.GetResponse();
+        long size = resp.ContentLength;
+        resp.Close();
+        return size;
+
     }
 }
 
