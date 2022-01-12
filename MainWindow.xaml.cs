@@ -37,7 +37,6 @@ public partial class MainWindow : Window
 
     ModList modList;
     ModInfoPage modInfoPage;
-
     public MainWindow()
     {
         Scraper.setHeaders();
@@ -49,6 +48,7 @@ public partial class MainWindow : Window
         images      = new();
         modList     = new();
         modInfoPage = new();
+
 
         version.Text = "v1.1.0";
         //modList.pagesGrid.ShowGridLines = true;
@@ -145,14 +145,7 @@ public partial class MainWindow : Window
     {
         if (e.Key == Key.Enter)
         {
-            if (!int.TryParse(txtInputPages.Text, out int page)) return;
-
-            actualPage = page;
-
-            txtAux.Text = "Cargando";
-
-            await LoadPage(actualPage);
-            txtAux.Text = "Terminado";
+            btnSearch_Click(sender, new RoutedEventArgs());
         }
     }
 

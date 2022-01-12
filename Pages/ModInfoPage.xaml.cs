@@ -111,20 +111,20 @@ namespace webScrapWPF.Pages
             versionListGrid.Children.Add(download_count);
             versionListGrid.Children.Add(modLoader);
 
-
-
             modIcon.Source = new BitmapImage(new Uri(actualMod.icon_url));
             modName.Text = actualMod.title;
 
+            downloadProgress.Visibility = Visibility.Hidden;
+            downloadProgress.Tag        = "";
 
             modDesc.Text = actualMod.description;
             timesDownloaded.Text = String.Format("DOWNLOADS\n{0:N0}", actualMod.downloads); //$"DOWNLOADS\n{(actualMod.downloads)} hola";
             lastVersion.Text = $"LASTEST VERSION\n{actualMod.latest_version}";
             clientSide.Text = $"CLIENT SIDE\n{string.Concat(actualMod.client_side[0].ToString().ToUpper(), actualMod.client_side.AsSpan(1))}";
-            serverSide.Text = $"SERVER SIE\n{string.Concat(actualMod.server_side[0].ToString().ToUpper(), actualMod.server_side.AsSpan(1))}";
+            serverSide.Text = $"SERVER SIDE\n{string.Concat(actualMod.server_side[0].ToString().ToUpper(), actualMod.server_side.AsSpan(1))}";
 
             List<string> icons = new(){ "adventure", "misc", "utility", "decoration", "fabric", "forge", "worldgen",
-                                        "library"};
+                                        "library", "equipment"};
 
             foreach (var category in actualMod.categories)
             {
@@ -155,6 +155,9 @@ namespace webScrapWPF.Pages
         }
         public void DataRefresh()
         {
+
+            downloadProgress.Visibility = Visibility.Hidden;
+            downloadProgress.Tag = "";
 
             int i = 1;
             foreach(var version in actualMod.versionsDetailled)
@@ -214,12 +217,17 @@ namespace webScrapWPF.Pages
         }
         public async void downloadClicked(object sender, MouseButtonEventArgs e)
         {
+            downloadProgress.Value = 0;
+            downloadProgress.Visibility = Visibility.Visible;
             Image send = (Image)sender;
             int pos = int.Parse(send.Name.Replace("icon", ""))-1;
 
             string url = actualMod.versionsDetailled[pos].files[0].url;
-
+            downloadProgress.Value = 10;
+            downloadProgress.Tag = "10%";
             await Scraper.download(url, actualMod.versionsDetailled[pos].files[0].filename);
+            downloadProgress.Value = 100;
+            downloadProgress.Tag = "Done!";
         }
     }
 }

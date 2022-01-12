@@ -10,6 +10,7 @@ namespace webScrapWPF;
 public class Scraper
 {
 
+    static int downloadProgressPerc = 0;
 
     public static HttpClient client = new(new HttpClientHandler()
     {
@@ -44,6 +45,8 @@ public class Scraper
         //client.
 
         string path = $"{MainWindow.downloadPath}/{fileName}";
+
+        
 
         if (response.IsSuccessStatusCode)
         {

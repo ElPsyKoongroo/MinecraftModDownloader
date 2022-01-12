@@ -29,7 +29,10 @@
                 <StackPanel>
                     <TextBlock  x:Name="modName" Text="Name" Foreground="#b6b7ba" Margin="5,0" FontSize="20" TextWrapping="Wrap"/>
                     <TextBlock  x:Name="modDesc" Text="Desc" Foreground="#b6b7ba" Margin="5,10" FontSize="13" TextWrapping="Wrap"/>
-
+                    <Grid Width="200" HorizontalAlignment="Left">
+                        <ProgressBar x:Name="downloadProgress" BorderThickness="10" HorizontalAlignment="Left" Width="200" Visibility="Visible"></ProgressBar>
+                        <TextBlock Text="{Binding ElementName=downloadProgress, Path=Tag}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Grid>
                 </StackPanel>
             </ScrollViewer>
 
