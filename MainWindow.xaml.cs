@@ -50,7 +50,7 @@ public partial class MainWindow : Window
         modInfoPage = new();
 
 
-        version.Text = "v1.1.0";
+        version.Text = "v1.2.1-1";
         //modList.pagesGrid.ShowGridLines = true;
 
         frame.Content = modList;
@@ -163,7 +163,7 @@ public partial class MainWindow : Window
             modNames[i].Text = pages[actualPage].mods[i].title;
 
             if (pages[actualPage].mods[i].icon_url == "")
-                pages[actualPage].mods[i].icon_url = @"U:\Programacion\C#\webScrapWPF\Resources\imageNotFound.png";
+                pages[actualPage].mods[i].icon_url = "pack://application:,,,/Resources/imageNotFound.png";
             images[i].Source = new BitmapImage(new Uri(pages[actualPage].mods[i].icon_url));
         }
 
