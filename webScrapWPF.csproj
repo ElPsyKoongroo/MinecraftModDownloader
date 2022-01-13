@@ -49,7 +49,6 @@
     <Resource Include="Resources\equipment.png" />
     <Resource Include="Resources\fabric.png" />
     <Resource Include="Resources\forge.png" />
-    <Resource Include="Resources\Image1.png" />
     <Resource Include="Resources\ImageNotFound.png" />
     <Resource Include="Resources\library.png" />
     <Resource Include="Resources\loadging.gif" />
