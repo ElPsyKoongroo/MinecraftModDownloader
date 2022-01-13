@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using webScrapWPF;
 
 namespace webScrapWPF.Pages
@@ -22,26 +24,47 @@ namespace webScrapWPF.Pages
     public partial class ModInfoPage
     {
         ModInfo actualMod;
-        BitmapImage downloadImage;
+        Image downloadImage;
+        Image downloadImage2;
         BitmapImage forgeImage;
         BitmapImage fabricImage;
+        BitmapImage bitmapImage;
         public ModInfoPage()
         {
             InitializeComponent();
             actualMod = new ModInfo();
-            downloadImage = new BitmapImage();
-            downloadImage.BeginInit();
-            downloadImage.UriSource = new Uri(@"X:\GitHub\MinecraftModDownloader\Resources\download.png");
-            downloadImage.EndInit();
+            downloadImage = new Image
+            {
+                Source = new BitmapImage(new Uri("pack://application:,,,/Resources/download.png"))
+            };
+            
+
+            
+
+            downloadImage2 = new Image();
+            System.Drawing.Bitmap downloadBitMap;
+
+            downloadBitMap = Properties.Resources.download;
+            bitmapImage = new BitmapImage();
+            using (System.IO.MemoryStream coso = new())
+            {
+                downloadBitMap.Save(coso, ImageFormat.Png);
+                coso.Position = 0;
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = coso;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+            }
+
 
             forgeImage = new BitmapImage();
             forgeImage.BeginInit();
-            forgeImage.UriSource = new Uri(@"X:\GitHub\MinecraftModDownloader\Resources\forge.png");
+            forgeImage.UriSource = new Uri("pack://application:,,,/Resources/forge.png");
             forgeImage.EndInit();
 
             fabricImage = new BitmapImage();
             fabricImage.BeginInit();
-            fabricImage.UriSource = new Uri(@"X:\GitHub\MinecraftModDownloader\Resources\fabric.png");
+            fabricImage.UriSource = new Uri("pack://application:,,,/Resources/fabric.png");
             fabricImage.EndInit();
             
         }
@@ -140,12 +163,12 @@ namespace webScrapWPF.Pages
 
                 Image categoryImage = new();
                 if (icons.Contains(category))
-                    categoryImage.Source = new BitmapImage(new Uri(@"X:\GitHub\MinecraftModDownloader\Resources\" + category + ".png"));
-                else categoryImage.Source = new BitmapImage(new Uri(@"X:\GitHub\MinecraftModDownloader\Resources\imageNotFound.png"));
+                    categoryImage.Source = new BitmapImage(new Uri(@"U:\Programacion\C#\webScrapWPF\Resources\" + category + ".png"));
+                else categoryImage.Source = new BitmapImage(new Uri(@"U:\Programacion\C#\webScrapWPF\Resources\imageNotFound.png"));
                 categoryImage.VerticalAlignment = VerticalAlignment.Top;
                 categoryImage.Stretch = Stretch.Uniform;
                 categoryImage.Height = 25;
-
+                // U:\Programacion\C#\webScrapWPF\Resources\
 
                 tagFull.Children.Add(categoryImage);
                 tagFull.Children.Add(categoryText);
@@ -166,7 +189,7 @@ namespace webScrapWPF.Pages
                 Image loader = new();
 
                 download.MouseLeftButtonDown += downloadClicked;
-                download.Source = downloadImage;
+                download.Source = downloadImage.Source;
                 download.Margin = new Thickness(8);
                 download.Name   = $"icon{i}";
                 versionListGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(50) });

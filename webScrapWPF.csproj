@@ -12,14 +12,65 @@
   <ItemGroup>
     <None Remove="Pages\download2.png" />
     <None Remove="Pages\download256x256.png" />
+    <None Remove="Resources\adventure.png" />
+    <None Remove="Resources\bored.gif" />
+    <None Remove="Resources\coso.svg" />
+    <None Remove="Resources\decoration.png" />
+    <None Remove="Resources\download.png" />
+    <None Remove="Resources\download2.png" />
+    <None Remove="Resources\download256x256.png" />
+    <None Remove="Resources\equipment.png" />
+    <None Remove="Resources\fabric.png" />
+    <None Remove="Resources\forge.png" />
+    <None Remove="Resources\Image1.png" />
+    <None Remove="Resources\ImageNotFound.png" />
+    <None Remove="Resources\library.png" />
+    <None Remove="Resources\loadging.gif" />
+    <None Remove="Resources\misc.png" />
+    <None Remove="Resources\utility.png" />
+    <None Remove="Resources\worldgen.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\Modrinth.ico" />
+    <Resource Include="Resources\Modrinth.ico" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="Pages\download2.png" />
+    <Resource Include="Resources\adventure.png" />
+    <Resource Include="Resources\bored.gif" />
+    <Resource Include="Resources\coso.svg" />
+    <Resource Include="Resources\decoration.png" />
+    <Resource Include="Resources\download.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\download2.png" />
+    <Resource Include="Resources\download256x256.png" />
+    <Resource Include="Resources\equipment.png" />
+    <Resource Include="Resources\fabric.png" />
+    <Resource Include="Resources\forge.png" />
+    <Resource Include="Resources\Image1.png" />
+    <Resource Include="Resources\ImageNotFound.png" />
+    <Resource Include="Resources\library.png" />
+    <Resource Include="Resources\loadging.gif" />
+    <Resource Include="Resources\misc.png" />
+    <Resource Include="Resources\utility.png" />
+    <Resource Include="Resources\worldgen.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
