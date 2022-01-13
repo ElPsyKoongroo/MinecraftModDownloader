@@ -28,7 +28,6 @@ namespace webScrapWPF.Pages
         Image downloadImage2;
         BitmapImage forgeImage;
         BitmapImage fabricImage;
-        BitmapImage bitmapImage;
         public ModInfoPage()
         {
             InitializeComponent();
@@ -38,24 +37,6 @@ namespace webScrapWPF.Pages
                 Source = new BitmapImage(new Uri("pack://application:,,,/Resources/download.png"))
             };
             
-
-            
-
-            downloadImage2 = new Image();
-            System.Drawing.Bitmap downloadBitMap;
-
-            downloadBitMap = Properties.Resources.download;
-            bitmapImage = new BitmapImage();
-            using (System.IO.MemoryStream coso = new())
-            {
-                downloadBitMap.Save(coso, ImageFormat.Png);
-                coso.Position = 0;
-                bitmapImage.BeginInit();
-                bitmapImage.StreamSource = coso;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit();
-            }
-
 
             forgeImage = new BitmapImage();
             forgeImage.BeginInit();
@@ -163,8 +144,8 @@ namespace webScrapWPF.Pages
 
                 Image categoryImage = new();
                 if (icons.Contains(category))
-                    categoryImage.Source = new BitmapImage(new Uri(@"U:\Programacion\C#\webScrapWPF\Resources\" + category + ".png"));
-                else categoryImage.Source = new BitmapImage(new Uri(@"U:\Programacion\C#\webScrapWPF\Resources\imageNotFound.png"));
+                    categoryImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/" + category + ".png"));
+                else categoryImage.Source = new BitmapImage(new Uri("pack://application:,,,/Resources/imageNotFound.png"));
                 categoryImage.VerticalAlignment = VerticalAlignment.Top;
                 categoryImage.Stretch = Stretch.Uniform;
                 categoryImage.Height = 25;
