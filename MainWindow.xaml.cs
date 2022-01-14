@@ -136,7 +136,7 @@ public partial class MainWindow : Window
     {
         int page;
 
-        if(txtInputPages.Text == "")
+        if(txtInputPages.Text == "" || txtInputPages.Text == "0")
         {
             actualPage = 1;
         }
