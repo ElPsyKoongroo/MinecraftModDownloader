@@ -1,3 +1,12 @@
+# Version 1.3.0-1
+
+    Now you can search for specific mods !! 
+    Isn't that cool ?!
+
+    Know bugs:
+    ·   Some images are not found (not a bug just i didnt added them)
+    ·   If you search for page 0 program chrashes 
+
 # Version 1.3
 
     Now you can search for specific mods !! 
@@ -5,6 +14,9 @@
 
     Know bugs:
     ·   Some images are not found (not a bug just i didnt added them)
+    ·   If you search for page 0 program chrashes
+    ·   If you search for "" after searching for an specific mod, it 
+        appears 10 instead of 20 mods 
 
 
 # Version 1.2.1-1 
