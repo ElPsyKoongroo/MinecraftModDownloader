@@ -136,7 +136,12 @@ public partial class MainWindow : Window
     {
         int page;
 
-        if (!int.TryParse(txtInputPages.Text, out page)) {
+        if(txtInputPages.Text == "")
+        {
+            actualPage = 1;
+        }
+
+        else if (!int.TryParse(txtInputPages.Text, out page)) {
             pages[-1] = new Page();
             await pages[-1].InitQuery(txtInputPages.Text);
             actualPage = -1;
