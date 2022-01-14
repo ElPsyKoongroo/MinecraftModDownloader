@@ -12,10 +12,10 @@
     Isn't that cool ?!
 
     Know bugs:
-b1  ·   Some images are not found (not a bug just i didnt added them)
-b2  ·   If you search for page 0 program chrashes
-b2  ·   If you search for "" after searching for an specific mod, it 
-        appears 10 instead of 20 mods 
+    · b1  Some images are not found (not a bug just i didnt added them)
+    · b2  If you search for page 0 program chrashes
+    · b3  If you search for "" after searching for an specific mod, it 
+          appears 10 instead of 20 mods 
 
 
 # Version 1.2.1-1 
