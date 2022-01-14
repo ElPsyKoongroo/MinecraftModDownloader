@@ -30,5 +30,17 @@ public class Page
         limit = aux.limit;
         total_hits = aux.total_hits;
     }
+
+    public async Task InitQuery(string querry)
+    {
+        //Url urlPrueba = new((pageNumber - 1) * 20, 20);
+        var jsonInStringFormat = await Scraper.get(Url.getQueryFor(querry));
+        Page aux = JsonSerializer.Deserialize<Page>(jsonInStringFormat, new JsonSerializerOptions { IncludeFields = true });
+
+        hits = aux.hits;
+        offset = aux.offset;
+        limit = aux.limit;
+        total_hits = aux.total_hits;
+    }
 }
 

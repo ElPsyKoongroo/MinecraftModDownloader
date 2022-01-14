@@ -37,6 +37,9 @@ public partial class MainWindow : Window
 
     ModList modList;
     ModInfoPage modInfoPage;
+
+    manyNames modNamesList;
+
     public MainWindow()
     {
         Scraper.setHeaders();
@@ -102,7 +105,9 @@ public partial class MainWindow : Window
 
     private async void Init()
     {
+        pages.Add(-1, new Page());
         await LoadPage(actualPage);
+        await bigNameSearch();
     }
 
     private async void clickOnMod(object sender, MouseButtonEventArgs e)
@@ -131,12 +136,18 @@ public partial class MainWindow : Window
     {
         int page;
 
-        if (!int.TryParse(txtInputPages.Text, out page)) return;
+        if (!int.TryParse(txtInputPages.Text, out page)) {
+            pages[-1] = new Page();
+            await pages[-1].InitQuery(txtInputPages.Text);
+            actualPage = -1;
+        }
+        else
+        {
+            actualPage = page;
 
-        actualPage = page;
-        
-        txtAux.Text = "Cargando";
+            txtAux.Text = "Cargando";
 
+        }
         await LoadPage(actualPage);
         txtAux.Text = "Terminado";
     }
@@ -158,13 +169,26 @@ public partial class MainWindow : Window
             pages.Add(page, auxPage);
         }
 
-        for(int i = 0; i < 20; i++)
+        for(int i = 0; i < pages[actualPage].mods.Count; i++)
         {
+
+            stackPanels[i].Visibility = Visibility.Visible;
+            stackPanels[i].IsEnabled = true;
+
             modNames[i].Text = pages[actualPage].mods[i].title;
 
             if (pages[actualPage].mods[i].icon_url == "")
                 pages[actualPage].mods[i].icon_url = "pack://application:,,,/Resources/imageNotFound.png";
             images[i].Source = new BitmapImage(new Uri(pages[actualPage].mods[i].icon_url));
+        }
+
+        if(pages[actualPage].mods.Count < 20)
+        {
+            for(int i = pages[actualPage].mods.Count; i < 20; i++)
+            {
+                stackPanels[i].Visibility = Visibility.Hidden;
+                stackPanels[i].IsEnabled = false;
+            }
         }
 
     }
@@ -184,4 +208,12 @@ public partial class MainWindow : Window
         txtInputFolder.Text = fbd.SelectedPath;
         downloadPath = fbd.SelectedPath.Replace("\\", "/");
     }
+
+
+    private async Task bigNameSearch()
+    {
+        string jsonInStringFormat = await Scraper.get(Url.getFullUrl(100, 0));
+        modNamesList = JsonSerializer.Deserialize<manyNames>(jsonInStringFormat, new JsonSerializerOptions {IncludeFields=true});
+    }
+
 }

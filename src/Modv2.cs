@@ -56,7 +56,7 @@ public class VersionInfo
     public string           date_published;
     public string           version_type;
     public List<FileInfo>   files;
-    public List<string>     dependencies;
+    public List<dependency> dependencies;
     public List<string>     game_versions;
     public List<string>     loaders;
 }
@@ -66,4 +66,22 @@ public class FileInfo
     public string                       url;
     public string                       filename;
     public bool                         primary;
+}
+
+
+public struct dependency
+{
+    public string version_id;
+    public string dependency_type;
+}
+
+public struct manyNames
+{
+    public List<ModName> hits;
+}
+
+public struct ModName
+{
+    public string title;
+    public string mod_id;
 }

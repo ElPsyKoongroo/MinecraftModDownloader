@@ -28,6 +28,11 @@ public class Url
         return $"{baseUrl}limit={length.ToString()}&offset={offset.ToString()}";
     }
 
+    public static string getFullUrl(int length, int offset)
+    {
+        return $"{baseUrl}limit={length.ToString()}&offset={offset.ToString()}";
+    }
+
     public static string getFilteredModsUrl(List<string> filters)
     {
 
@@ -47,6 +52,11 @@ public class Url
     public static string getVersionsUrl(string modId)
     {
         return $"https://api.modrinth.com/api/v1/mod/{modId}/version";
+    }
+
+    public static string getQueryFor(string search)
+    {
+        return $"{baseUrl}query={search}";
     }
 
 }
