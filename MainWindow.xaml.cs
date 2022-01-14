@@ -53,7 +53,7 @@ public partial class MainWindow : Window
         modInfoPage = new();
 
 
-        version.Text = "v1.2.1-1";
+        version.Text = "v1.3";
         //modList.pagesGrid.ShowGridLines = true;
 
         frame.Content = modList;
