@@ -1,13 +1,24 @@
+# Version 1.3.1
+
+    Fixed bugs :)
+        · b2 !!
+
+    New:
+        · Now there is no scrollbar in modInfo section !
+        · Added Version Type !! (release/beta/alpha) with colors
+    
+    Bugs :(
+        · b1  Some images are not found (not a bug just i didnt added them) 
+
 # Version 1.3.0-1
 
     b3 Fixed !
 
     Know bugs:
-    · b1    If you change from one mod to another while the first one is
+    · b1    Some images are not found (not a bug just i didnt added them)
+    · b2    If you search for page 0 or any negative numbers program chrashes  
+    · b4    If you change from one mod to another while the first one is
             loding, the program chrash
-
-    · b2    Some images are not found (not a bug just i didnt added them)
-    · b3    If you search for page 0 program chrashes 
 
 # Version 1.3
 
