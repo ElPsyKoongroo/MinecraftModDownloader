@@ -53,7 +53,7 @@ public partial class MainWindow : Window
         modInfoPage = new();
 
 
-        version.Text = "v1.3";
+        version.Text = "v1.3.1";
         //modList.pagesGrid.ShowGridLines = true;
 
         frame.Content = modList;
@@ -136,12 +136,14 @@ public partial class MainWindow : Window
     {
         int page;
 
-        if(txtInputPages.Text == "" || txtInputPages.Text == "0")
+        if (txtInputPages.Text == "" || int.Parse(txtInputPages.Text) <= 0)
         {
-            actualPage = 1;
+            txtAux.Text = "Pagina no encontrada";
+            return;
         }
 
-        else if (!int.TryParse(txtInputPages.Text, out page)) {
+        else if (!int.TryParse(txtInputPages.Text, out page))
+        {
             pages[-1] = new Page();
             await pages[-1].InitQuery(txtInputPages.Text);
             actualPage = -1;

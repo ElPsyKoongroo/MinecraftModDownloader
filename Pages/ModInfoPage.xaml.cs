@@ -36,7 +36,6 @@ namespace webScrapWPF.Pages
             {
                 Source = new BitmapImage(new Uri("pack://application:,,,/Resources/download.png"))
             };
-            
 
             forgeImage = new BitmapImage();
             forgeImage.BeginInit();
@@ -47,7 +46,6 @@ namespace webScrapWPF.Pages
             fabricImage.BeginInit();
             fabricImage.UriSource = new Uri("pack://application:,,,/Resources/fabric.png");
             fabricImage.EndInit();
-            
         }
             
         public async void ChangeMod(Task modTask, ModInfo newMod)
@@ -64,56 +62,6 @@ namespace webScrapWPF.Pages
             tags.Children.Clear();
             versionListGrid.Children.Clear();
             versionListGrid.RowDefinitions.Clear();
-
-            versionListGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(50) });
-
-            TextBlock txtName = new();
-            TextBlock download_count = new();
-            TextBlock download = new();
-            TextBlock modLoader = new();
-
-            Grid.SetRow(txtName, 0);
-            Grid.SetRow(download_count, 0);
-            Grid.SetRow(download, 0);
-            Grid.SetRow(modLoader, 0);
-
-            Grid.SetColumn(txtName, 0);
-            Grid.SetColumn(download_count, 1);
-            Grid.SetColumn(modLoader, 2);
-            Grid.SetColumn(download, 3);
-
-
-            txtName.FontSize    = 16;
-            download.FontSize   = 16;
-            download_count.FontSize  = 16;
-            modLoader.FontSize = 16;
-
-            txtName.HorizontalAlignment = HorizontalAlignment.Center;
-            txtName.VerticalAlignment = VerticalAlignment.Top;
-
-            download.VerticalAlignment = VerticalAlignment.Top;
-            download.HorizontalAlignment = HorizontalAlignment.Center;  
-
-            download_count.HorizontalAlignment = HorizontalAlignment.Center;
-            download_count.VerticalAlignment = VerticalAlignment.Top;
-
-            modLoader.HorizontalAlignment = HorizontalAlignment.Center;
-            modLoader.VerticalAlignment = VerticalAlignment.Top;
-
-            txtName.Text = "Minecraft Version";
-            download_count.Text = "Total Downloads";
-            download.Text = "Download";
-            modLoader.Text = "Mod Loader";
-
-            txtName.Foreground = Utilities.Colors.darkThemeTextColor;
-            download.Foreground = Utilities.Colors.darkThemeTextColor;
-            download_count.Foreground = Utilities.Colors.darkThemeTextColor;
-            modLoader.Foreground = Utilities.Colors.darkThemeTextColor;
-
-            versionListGrid.Children.Add(txtName);
-            versionListGrid.Children.Add(download);
-            versionListGrid.Children.Add(download_count);
-            versionListGrid.Children.Add(modLoader);
 
             modIcon.Source = new BitmapImage(new Uri(actualMod.icon_url));
             modName.Text = actualMod.title;
@@ -149,7 +97,6 @@ namespace webScrapWPF.Pages
                 categoryImage.VerticalAlignment = VerticalAlignment.Top;
                 categoryImage.Stretch = Stretch.Uniform;
                 categoryImage.Height = 25;
-                // U:\Programacion\C#\webScrapWPF\Resources\
 
                 tagFull.Children.Add(categoryImage);
                 tagFull.Children.Add(categoryText);
@@ -163,7 +110,7 @@ namespace webScrapWPF.Pages
             downloadProgress.Visibility = Visibility.Hidden;
             downloadProgress.Tag = "";
 
-            int i = 1;
+            int i = 0;
             foreach(var version in actualMod.versionsDetailled)
             {
                 Image download = new();
@@ -186,8 +133,27 @@ namespace webScrapWPF.Pages
                 }
 
 
-                TextBlock actualVersion = new TextBlock();
-                TextBlock actualDownloads = new TextBlock();
+                TextBlock actualVersion     = new TextBlock();
+                TextBlock actualDownloads   = new TextBlock();
+                TextBlock versionType       = new TextBlock();
+                Border rect              = new();
+
+                //alpha 155,44,44
+                //release   39,103,73
+                //beta 101,80,39
+
+                rect.BorderThickness = new Thickness(5);
+                rect.CornerRadius = new CornerRadius(10);
+
+                if(version.version_type == "alpha")
+                    rect.Background = new SolidColorBrush(Color.FromRgb(155, 44, 44));
+                else if(version.version_type == "release")
+                    rect.Background = new SolidColorBrush(Color.FromRgb(39, 103, 73));
+                else
+                    rect.Background = new SolidColorBrush(Color.FromRgb(101, 80, 39));
+
+                rect.Margin = new Thickness(20,5,20,5);
+
 
                 actualVersion.Text = String.Join(", ", version.game_versions);      
                 actualVersion.Foreground = Utilities.Colors.darkThemeTextColor;
@@ -202,20 +168,32 @@ namespace webScrapWPF.Pages
                 actualDownloads.HorizontalAlignment = HorizontalAlignment.Center;
                 actualDownloads.VerticalAlignment = VerticalAlignment.Center;
 
+                versionType.Text = version.version_type;
+                versionType.Foreground = Utilities.Colors.darkThemeTextColor;
+                versionType.FontSize = 16;
+                versionType.HorizontalAlignment = HorizontalAlignment.Center;
+                versionType.VerticalAlignment = VerticalAlignment.Center;
+
                 Grid.SetColumn(actualVersion, 0);
                 Grid.SetColumn(actualDownloads, 1);
                 Grid.SetColumn(loader, 2);
-                Grid.SetColumn(download, 3);
+                Grid.SetColumn(versionType, 3);
+                Grid.SetColumn(rect, 3);
+                Grid.SetColumn(download, 4);
 
                 Grid.SetRow(actualDownloads, i);
                 Grid.SetRow(actualVersion, i);
                 Grid.SetRow(download, i);
+                Grid.SetRow(versionType, i);
+                Grid.SetRow(rect, i);
                 Grid.SetRow(loader, i);
 
                 versionListGrid.Children.Add(actualDownloads);
                 versionListGrid.Children.Add(actualVersion);
                 versionListGrid.Children.Add(download);
+                versionListGrid.Children.Add(rect);
                 versionListGrid.Children.Add(loader);
+                versionListGrid.Children.Add(versionType);
                 i++;
             }
         }
