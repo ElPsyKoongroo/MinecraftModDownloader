@@ -58,17 +58,37 @@
             </Grid>
         </Grid>
 
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="auto">
-            <Grid x:Name="versionListGrid" Margin="5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment = "Center" VerticalAlignment = "Top" Foreground = "#b6b7ba" FontSize = "16" Text="Minecraft Version"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment = "Center" VerticalAlignment = "Top" Foreground = "#b6b7ba" FontSize = "16" Text="Total Downloads"/>
+            <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment = "Center" VerticalAlignment = "Top" Foreground = "#b6b7ba" FontSize = "16" Text="Mod loader"/>
+            <TextBlock Grid.Row="0" Grid.Column="3" HorizontalAlignment = "Center" VerticalAlignment = "Top" Foreground = "#b6b7ba" FontSize = "16" Text="Version Type"/>
+            <TextBlock Grid.Row="0" Grid.Column="4" HorizontalAlignment = "Center" VerticalAlignment = "Top" Foreground = "#b6b7ba" FontSize = "16" Text="Download"/>
+            
+            <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" VerticalScrollBarVisibility="Hidden" >
+                <Grid x:Name="versionListGrid">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
 
-            </Grid>
-        </ScrollViewer>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Page>
