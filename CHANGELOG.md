@@ -3,8 +3,11 @@
     b3 Fixed !
 
     Know bugs:
-    ·   Some images are not found (not a bug just i didnt added them)
-    ·   If you search for page 0 program chrashes 
+    · b1    If you change from one mod to another while the first one is
+            loding, the program chrash
+
+    · b2    Some images are not found (not a bug just i didnt added them)
+    · b3    If you search for page 0 program chrashes 
 
 # Version 1.3
 
