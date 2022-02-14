@@ -87,7 +87,8 @@ public partial class MainWindow : Window
             modNames[i].VerticalAlignment       = VerticalAlignment.Center;
 
             modNames[i].FontSize = 20;
-            modNames[i].TextWrapping = TextWrapping.WrapWithOverflow;
+            modNames[i].MaxHeight = 40;
+            modNames[i].TextWrapping = TextWrapping.Wrap;
 
             stackPanels[i].Children.Add(images[i]);
             stackPanels[i].Children.Add(modNames[i]);

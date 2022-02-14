@@ -27,6 +27,7 @@
     <None Remove="Resources\library.png" />
     <None Remove="Resources\loadging.gif" />
     <None Remove="Resources\misc.png" />
+    <None Remove="Resources\settings.png" />
     <None Remove="Resources\utility.png" />
     <None Remove="Resources\worldgen.png" />
   </ItemGroup>
@@ -53,6 +54,7 @@
     <Resource Include="Resources\library.png" />
     <Resource Include="Resources\loadging.gif" />
     <Resource Include="Resources\misc.png" />
+    <Resource Include="Resources\settings.png" />
     <Resource Include="Resources\utility.png" />
     <Resource Include="Resources\worldgen.png" />
   </ItemGroup>

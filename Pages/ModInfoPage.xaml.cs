@@ -206,7 +206,7 @@ namespace webScrapWPF.Pages
             downloadProgress.Value = 0;
             downloadProgress.Visibility = Visibility.Visible;
             Image send = (Image)sender;
-            int pos = int.Parse(send.Name.Replace("icon", ""))-1;
+            int pos = int.Parse(send.Name.Replace("icon", ""));
 
             string url = actualMod.versionsDetailled[pos].files[0].url;
             await Scraper.download(url, actualMod.versionsDetailled[pos].files[0].filename, progress);
