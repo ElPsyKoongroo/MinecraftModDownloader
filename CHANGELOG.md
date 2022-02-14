@@ -9,6 +9,7 @@
     
     Bugs :(
         · b1  Some images are not found (not a bug just i didnt added them) 
+        · b5  Can't download the last version of every mod
 
 # Version 1.3.0-1
 
