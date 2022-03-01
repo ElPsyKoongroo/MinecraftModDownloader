@@ -7,53 +7,96 @@
         mc:Ignorable="d"
         Title="Mod downloader" Height="800" Width="1400" MinHeight="450" MinWidth="800">
 
-    <Window.Resources>
-
-        <ResourceDictionary Source="/Styles/MainWindowStyle.xaml"/>
-
-    </Window.Resources>
-
-    <Grid x:Name="windowGrid" Background="#262324">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="20"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
-        </Grid.RowDefinitions>
-
-        <Grid Grid.Row="1" Grid.Column="1">
+    <Border Background="#2c3c4c" CornerRadius="40">
+        <Grid x:Name="windowGrid" 
+              Background="#262324">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8.667"/>
+                <ColumnDefinition Width="11.333"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="20"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="371*"/>
+                <RowDefinition Height="374*"/>
+                <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
-            <StackPanel x:Name="stackLeft" Grid.Row="0" Orientation="Vertical">
-                <StackPanel Orientation="Horizontal">
-                    <TextBox Foreground="#b6b7ba" Width="150" x:Name="txtInputPages" KeyDown="btnSearchOnKeyDown"/>
-                    <Button x:Name="btnSearch" Width="100" Content="Click para buscar" Click="btnSearch_Click" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Foreground="#b6b7ba" Width="150" x:Name="txtAux" TextAlignment="Left" HorizontalAlignment="Left"/>
-                    <Button x:Name="btnBack" Width="100" Content="Back" Click="btnBack_Click" IsEnabled="False" />
-                </StackPanel>
-            </StackPanel>
+            <Grid Grid.Row="1" Grid.Column="2" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="1" Orientation="Vertical">
-                <TextBox x:Name="txtInputFolder" MinWidth="200" IsEnabled="False" HorizontalAlignment="Left"/>
-                <Button x:Name="btnFolder" Width="90" Content="Select Folder" Click="btnFolder_Click" HorizontalAlignment="Left"/>
-            </StackPanel>
-            <TextBlock x:Name="txtSize" Foreground="White" FontSize="15" HorizontalAlignment="Center" Grid.Row="1"/>
-            <TextBlock x:Name="version" Text="v1.0" Foreground="White" FontSize="15" VerticalAlignment="Bottom" Grid.Row="1"/>
+                <StackPanel x:Name="stackLeft" 
+                            Grid.Row="0" 
+                            Orientation="Vertical">
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBox x:Name="txtInputPages" 
+                                 Foreground="#b6b7ba" 
+                                 Width="150" 
+                                 KeyDown="btnSearchOnKeyDown"/>
+
+                        <Button x:Name="btnSearch" 
+                                Width="100" 
+                                Content="Click para buscar" 
+                                Click="btnSearch_Click" />
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock x:Name="txtAux" 
+                                   Foreground="#b6b7ba" 
+                                   Width="150" 
+                                   TextAlignment="Left" 
+                                   HorizontalAlignment="Left"/>
+
+                        <Button x:Name="btnBack" 
+                                Width="100" 
+                                Content="Back" 
+                                Click="btnBack_Click" 
+                                IsEnabled="False" />
+                    </StackPanel>
+                    <StackPanel  Orientation="Vertical"
+                                 Margin="0,20,0,0">
+                        <TextBox x:Name="txtInputFolder" 
+                                 MinWidth="200"
+                                 MaxWidth="200"
+                                 HorizontalAlignment="Left"
+                                 IsEnabled="False"/>
+                        <Button x:Name="btnFolder" 
+                                Width="90" 
+                                Content="Select Folder" 
+                                Click="btnFolder_Click" 
+                                HorizontalAlignment="Left"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1"
+                            VerticalAlignment="Bottom">
+
+
+                    <TextBlock x:Name="version" 
+                               Text="v1.0" 
+                               Foreground="LightGray" 
+                               FontSize="15" 
+                               VerticalAlignment="Bottom"/>
+                </StackPanel>
+            </Grid>
+            <Frame x:Name="frame" Grid.Row="1" Grid.Column="2" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2" Margin="453,0,0,0" Grid.RowSpan="2"/>
+            <Frame x:Name="frame_Copy" 
+                   Grid.Row="1" 
+                   Grid.Column="2" 
+                   NavigationUIVisibility="Hidden" 
+                   Grid.ColumnSpan="2" 
+                   Margin="453,0,0,0" Grid.RowSpan="2"/>
         </Grid>
-        <Frame x:Name="frame" Grid.Row="1" Grid.Column="2" NavigationUIVisibility="Hidden"/>
-
-    </Grid>
+    </Border>
 </Window>
