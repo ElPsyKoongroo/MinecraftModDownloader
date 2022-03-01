@@ -82,6 +82,7 @@ public partial class MainWindow : Window
             images[i].HorizontalAlignment       = System.Windows.HorizontalAlignment.Center;
             images[i].VerticalAlignment         = VerticalAlignment.Center;
             images[i].Height                    = 100;
+            images[i].Margin = new Thickness(0, 20, 0, 0);
 
             modNames[i].HorizontalAlignment     = System.Windows.HorizontalAlignment.Center;
             modNames[i].VerticalAlignment       = VerticalAlignment.Center;
@@ -89,8 +90,15 @@ public partial class MainWindow : Window
             modNames[i].FontSize = 20;
             modNames[i].TextWrapping = TextWrapping.WrapWithOverflow;
 
+            SolidColorBrush clr = new();
+            stackPanels[i].Background = clr;
+
+            stackPanels[i].Style = (Style)this.Resources["StackPanelStyle1"];
             stackPanels[i].Children.Add(images[i]);
             stackPanels[i].Children.Add(modNames[i]);
+            stackPanels[i].MinHeight = 150;
+            stackPanels[i].MinWidth = 200;
+
 
             modList.pagesGrid.Children.Add(stackPanels[i]);
 

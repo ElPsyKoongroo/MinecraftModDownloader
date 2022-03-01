@@ -6,6 +6,13 @@
         xmlns:local="clr-namespace:webScrapWPF"
         mc:Ignorable="d"
         Title="Mod downloader" Height="800" Width="1400" MinHeight="450" MinWidth="800">
+
+    <Window.Resources>
+
+        <ResourceDictionary Source="/Styles/MainWindowStyle.xaml"/>
+
+    </Window.Resources>
+
     <Grid x:Name="windowGrid" Background="#262324">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
@@ -18,7 +25,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        
+
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -40,8 +47,8 @@
             </StackPanel>
 
             <StackPanel Grid.Row="1" Orientation="Vertical">
-                    <TextBox x:Name="txtInputFolder" MinWidth="200" IsEnabled="False" HorizontalAlignment="Left"/>
-                    <Button x:Name="btnFolder" Width="90" Content="Select Folder" Click="btnFolder_Click" HorizontalAlignment="Left"/>
+                <TextBox x:Name="txtInputFolder" MinWidth="200" IsEnabled="False" HorizontalAlignment="Left"/>
+                <Button x:Name="btnFolder" Width="90" Content="Select Folder" Click="btnFolder_Click" HorizontalAlignment="Left"/>
             </StackPanel>
             <TextBlock x:Name="txtSize" Foreground="White" FontSize="15" HorizontalAlignment="Center" Grid.Row="1"/>
             <TextBlock x:Name="version" Text="v1.0" Foreground="White" FontSize="15" VerticalAlignment="Bottom" Grid.Row="1"/>
