@@ -143,6 +143,16 @@ namespace webScrapWPF.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap optimization {
+            get {
+                object obj = ResourceManager.GetObject("optimization", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap utility {
             get {
                 object obj = ResourceManager.GetObject("utility", resourceCulture);

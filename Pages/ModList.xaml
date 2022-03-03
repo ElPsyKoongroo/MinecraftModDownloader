@@ -10,22 +10,12 @@
       Title="ModList">
 
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <Grid x:Name="pagesGrid" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-            </Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            <StackPanel 
+                x:Name="CardPanel" 
+                Orientation="Vertical">
+                
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 </Page>

@@ -32,6 +32,7 @@ public partial class MainWindow : Window
     int actualPage = 1;
 
     List<TextBlock> modNames;
+    List<TextBlock> modAuthor;
     List<Image> images;
     List<StackPanel> stackPanels;
 
@@ -42,18 +43,19 @@ public partial class MainWindow : Window
 
     public MainWindow()
     {
-        Scraper.setHeaders();
         InitializeComponent();
-        pages       = new();
+        Scraper.setHeaders();
 
+        pages       = new();
         modNames    = new();
+        modAuthor   = new();
         stackPanels = new();
         images      = new();
         modList     = new();
         modInfoPage = new();
+       
 
-
-        version.Text = "v1.3.1";
+        version.Text = "v1.3.3";
         //modList.pagesGrid.ShowGridLines = true;
 
         frame.Content = modList;
@@ -64,52 +66,76 @@ public partial class MainWindow : Window
         for (int i = 0; i < 20; i++)
         {
             modNames.Add(new TextBlock());
-            stackPanels.Add(new StackPanel());
+            modAuthor.Add(new TextBlock());
             images.Add(new Image());
 
-            modNames[i].Name        = $"txtBlock{(i+1).ToString()}";
+            Grid Card = new();
+            Grid middleGrid = new();
+            //Card.ShowGridLines = true;
+
+            Card.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(125) });
+            Card.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(300) });
+            Card.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(0,0) });
+
+            middleGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(0,0)});
+            middleGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(0, 0)});
+
+            modNames[i].Name        = $"txtBlock{i + 1}";
             modNames[i].Foreground  = Utilities.Colors.darkThemeTextColor;
-            stackPanels[i].Name     = $"stackPanel{(i + 1).ToString()}";
-            images[i].Name          = $"image{(i + 1).ToString()}";
 
-            stackPanels[i].MouseLeftButtonDown += clickOnMod;
-            stackPanels[i].Margin = new Thickness(10);
-
-            stackPanels[i].HorizontalAlignment  = System.Windows.HorizontalAlignment.Center;
-            stackPanels[i].VerticalAlignment    = VerticalAlignment.Center;
-            stackPanels[i].Orientation = System.Windows.Controls.Orientation.Vertical;
-
-            images[i].HorizontalAlignment       = System.Windows.HorizontalAlignment.Center;
-            images[i].VerticalAlignment         = VerticalAlignment.Center;
+            modAuthor[i].Name       = $"txtBlock{i + 1}";
+            modAuthor[i].Foreground = Utilities.Colors.darkThemeTextColor;
+            
+            images[i].Name          = $"image{i + 1}";
+            images[i].HorizontalAlignment       = System.Windows.HorizontalAlignment.Left;
+            images[i].VerticalAlignment         = VerticalAlignment.Top;
             images[i].Height                    = 100;
-            images[i].Margin = new Thickness(0, 20, 0, 0);
-
-            modNames[i].HorizontalAlignment     = System.Windows.HorizontalAlignment.Center;
-            modNames[i].VerticalAlignment       = VerticalAlignment.Center;
+            Grid.SetColumn(images[i], 0);
 
             modNames[i].FontSize = 20;
             modNames[i].MaxHeight = 40;
-            modNames[i].TextWrapping = TextWrapping.Wrap;
 
-            SolidColorBrush clr = new();
-            stackPanels[i].Background = clr;
+            modAuthor[i].FontSize = 14;
+            modAuthor[i].MaxHeight = 40;
 
-            stackPanels[i].Style = (Style)this.Resources["StackPanelStyle1"];
-            stackPanels[i].Children.Add(images[i]);
-            stackPanels[i].Children.Add(modNames[i]);
-            stackPanels[i].MinHeight = 150;
-            stackPanels[i].MinWidth = 200;
+            modNames[i].TextAlignment       = System.Windows.TextAlignment.Left;
+            modNames[i].VerticalAlignment   = System.Windows.VerticalAlignment.Center;
+            modAuthor[i].TextAlignment      = System.Windows.TextAlignment.Left;
+            modAuthor[i].VerticalAlignment  = System.Windows.VerticalAlignment.Center;  
 
+            StackPanel nameAndAuthor = new() { Orientation = System.Windows.Controls.Orientation.Horizontal} ;
 
-            modList.pagesGrid.Children.Add(stackPanels[i]);
+            nameAndAuthor.Children.Add(modNames[i]);
+            nameAndAuthor.Children.Add(modAuthor[i]);
+            
+            Grid.SetColumn(nameAndAuthor, 0);
 
-            Grid.SetRow(stackPanels[i], i / 5);
-            Grid.SetColumn(stackPanels[i], i % 5);
+           
+            Grid.SetColumn(middleGrid, 1);
+            Grid.SetRow(middleGrid, 0);
+            
+            middleGrid.Children.Add(nameAndAuthor);
+            
+
+            Card.Children.Add(middleGrid);
+            Card.Children.Add(images[i]);
+            
+            Card.Margin = new Thickness(0, 0, 0, 15);
+
+            Card.MouseLeftButtonDown += clickOnMod;
+            Card.Name = $"Card{i + 1}";
+            modList.CardPanel.Children.Add(Card);
+
         }
 
         txtInputPages.Text = actualPage.ToString();
 
         Init();
+    }
+
+    private Grid getElement(int position)
+    {
+        return modList.CardPanel.Children.OfType<Grid>().ElementAt(position);
     }
 
     private async void Init()
@@ -121,9 +147,9 @@ public partial class MainWindow : Window
 
     private async void clickOnMod(object sender, MouseButtonEventArgs e)
     {
-        StackPanel sen = (StackPanel)sender;
+        Grid sen = (Grid)sender;
 
-        int currentMod = int.Parse(sen.Name.Replace("stackPanel", ""))-1;
+        int currentMod = int.Parse(sen.Name.Replace("Card", ""))-1;
 
         txtAux.Text = pages[actualPage].mods[currentMod].title;
 
@@ -188,11 +214,11 @@ public partial class MainWindow : Window
         for(int i = 0; i < pages[actualPage].mods.Count; i++)
         {
 
-            stackPanels[i].Visibility = Visibility.Visible;
-            stackPanels[i].IsEnabled = true;
+            getElement(i).Visibility = Visibility.Visible;
+            getElement(i).IsEnabled = true;
 
             modNames[i].Text = pages[actualPage].mods[i].title;
-
+            modAuthor[i].Text = "   by  " + pages[actualPage].mods[i].author;
             if (pages[actualPage].mods[i].icon_url == "")
                 pages[actualPage].mods[i].icon_url = "pack://application:,,,/Resources/imageNotFound.png";
             images[i].Source = new BitmapImage(new Uri(pages[actualPage].mods[i].icon_url));
@@ -202,8 +228,8 @@ public partial class MainWindow : Window
         {
             for(int i = pages[actualPage].mods.Count; i < 20; i++)
             {
-                stackPanels[i].Visibility = Visibility.Hidden;
-                stackPanels[i].IsEnabled = false;
+                getElement(i).Visibility = Visibility.Hidden;
+                getElement(i).IsEnabled = false;
             }
         }
 

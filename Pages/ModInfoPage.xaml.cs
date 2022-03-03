@@ -76,7 +76,7 @@ namespace webScrapWPF.Pages
             serverSide.Text = $"SERVER SIDE\n{string.Concat(actualMod.server_side[0].ToString().ToUpper(), actualMod.server_side.AsSpan(1))}";
 
             List<string> icons = new(){ "adventure", "misc", "utility", "decoration", "fabric", "forge", "worldgen",
-                                        "library", "equipment"};
+                                        "library", "equipment", "optimization"};
 
             foreach (var category in actualMod.categories)
             {
@@ -136,7 +136,7 @@ namespace webScrapWPF.Pages
                 TextBlock actualVersion     = new TextBlock();
                 TextBlock actualDownloads   = new TextBlock();
                 TextBlock versionType       = new TextBlock();
-                Border rect              = new();
+                Border rect                 = new();
 
                 //alpha 155,44,44
                 //release   39,103,73
