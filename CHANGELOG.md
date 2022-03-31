@@ -1,11 +1,19 @@
-# Version 1.3.2
+# Version 1.3.2 (Not published yet)
+
+    Fixed bugs :)
+        
+    
+    Bugs :(
+        · b1  Some images are not found (not a bug just i didnt added them) 
+
+
+# Version 1.3.1 v2
 
     Fixed bugs :)
         · b5 !!
     
     Bugs :(
         · b1  Some images are not found (not a bug just i didnt added them) 
-
 
 # Version 1.3.1
 
