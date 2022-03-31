@@ -145,17 +145,17 @@ public partial class MainWindow : Window
     {
         int page;
 
-        if (txtInputPages.Text == "" || int.Parse(txtInputPages.Text) <= 0)
-        {
-            txtAux.Text = "Pagina no encontrada";
-            return;
-        }
 
-        else if (!int.TryParse(txtInputPages.Text, out page))
+        if (!int.TryParse(txtInputPages.Text, out page))
         {
             pages[-1] = new Page();
             await pages[-1].InitQuery(txtInputPages.Text);
             actualPage = -1;
+        }
+        else if (txtInputPages.Text == "" || int.Parse(txtInputPages.Text) <= 0)
+        {
+            txtAux.Text = "Pagina no encontrada";
+            return;
         }
         else
         {
